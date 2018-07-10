@@ -44,12 +44,10 @@ public class MyArray<E>{
     }
     //向数组的指定位置添加一个元素
     public void add(int index,E e){
-        if(size == data.length){//数组已经满了
-            throw new IllegalArgumentException("数组已经满了");
-        }
         if(index<0 || index > size){
             throw new IllegalArgumentException("索引不合法");
         }
+        addCapacity();
         for(int i=size-1;i>index;i--){
             data[i+1] = data[i];
         }
@@ -123,6 +121,21 @@ public class MyArray<E>{
         }
         return false;
     }
+
+    /**
+     * 动态数组的 实现
+     *    建立一个新的数组  将原来数组的 所有元素复制进来
+     */
+    private void addCapacity(){
+       if(size == data.length){
+           E[] newData = (E[])new Object[size*2];
+           for (int i=0;i<size;i++){
+               newData[i] = data[i];
+           }
+           data = newData;
+       }
+    }
+
 
     //拼接字符串显示数组的信息
     @Override
