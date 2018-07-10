@@ -100,6 +100,7 @@ public class MyArray<E>{
             data[i-1] = data[i];
         }
         size--;
+        removeCapacity();
         return removeElement;
     }
 
@@ -124,6 +125,8 @@ public class MyArray<E>{
 
     /**
      * 动态数组的 实现
+     *
+     *   扩容   添加元素前 判断
      *    建立一个新的数组  将原来数组的 所有元素复制进来
      */
     private void addCapacity(){
@@ -134,6 +137,16 @@ public class MyArray<E>{
            }
            data = newData;
        }
+    }
+    //缩小容量  删除元素后 size的值-1后   判断
+    private void removeCapacity(){
+        if(size<=data.length/2){
+            E[] newData = (E[])new Object[data.length/2];
+            for (int i=0;i<newData.length;i++){
+                newData[i] = data[i];
+            }
+            data = newData;
+        }
     }
 
 
