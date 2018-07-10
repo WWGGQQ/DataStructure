@@ -1,0 +1,70 @@
+简单的复杂度分析
+    O  描述输入数据和执行时间的关系
+    对于自己封装的MyArray的复杂度分析
+      添加操作
+           在不考虑触发扩容的情况下：
+                addFirst(e)-->O(n)
+                addLast(e)-->O(1)
+                add(int index,int e)(和index取的值有关)
+                    O(n/2) --> O(n)
+                    最坏情况下：O（n）
+            触发扩容 -->O(n)
+      删除操作
+          同上  O（n）
+      修改操作
+          O(1)  （知道索引的情况）
+          数组最大的优势  支持随机访问
+      查找操作
+          知道索引  O(1)
+          不知道索引 O（n）
+===============================================================================================
+    均摊复杂度分析
+        添加元素时  不是每次添加都会触发扩容操作
+
+    复杂度的震荡
+       按照之前的写法 假设开辟一个数组  data设为4   向其中添加4个元素 ，在向其中添加时会扩容，再删除又会缩容
+       测试代码：
+           public static void main(String[] args){
+                   MyArray<Integer> array = new MyArray<>(4);
+                   array.addLast(1);
+                   array.addLast(2);
+                   array.addLast(3);
+                   array.addLast(4);
+                   System.out.println(array);
+                   array.addLast(5);
+                   System.out.println(array);
+                   array.removeLast();
+                   System.out.println(array);
+            }
+        结果：
+            Array: size = 4 , capacity = 4
+            [1,2,3,4]
+            Array: size = 5 , capacity = 8    *****************
+            [1,2,3,4,5]
+            Array: size = 4 , capacity = 4    *****************
+            [1,2,3,4]
+         这个是因为过于着急（Eager）
+        解决方法：
+           Lazy  ：当size==capacity/4时  ，才将capacity减半
+           原来代码：
+            //缩小容量  删除元素后 size的值-1后   判断
+               private void removeCapacity(){
+                   if(size<=data.length/2 && data.length/2!=0){*********
+                       E[] newData = (E[])new Object[data.length/2];
+                       for (int i=0;i<newData.length;i++){
+                           newData[i] = data[i];
+                       }
+                       data = newData;
+                   }
+               }
+             修改后
+                private void removeCapacity(){
+                   if(size<=data.length/4 && data.length/2!=0){*********
+                       E[] newData = (E[])new Object[data.length/2];
+                       for (int i=0;i<newData.length;i++){
+                           newData[i] = data[i];
+                       }
+                       data = newData;
+                   }
+               }
+

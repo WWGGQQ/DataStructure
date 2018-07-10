@@ -140,7 +140,7 @@ public class MyArray<E>{
     }
     //缩小容量  删除元素后 size的值-1后   判断
     private void removeCapacity(){
-        if(size<=data.length/2){
+        if(size<=data.length/2 && data.length/2!=0){
             E[] newData = (E[])new Object[data.length/2];
             for (int i=0;i<newData.length;i++){
                 newData[i] = data[i];
