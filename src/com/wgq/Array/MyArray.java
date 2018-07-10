@@ -61,6 +61,14 @@ public class MyArray<E>{
         }
         return data[index];
     }
+    //获取最后一位元素
+    public E getLast(){
+        return get(size-1);
+    }
+    //获得第一位元素
+    public E getFirst(){
+        return get(0);
+    }
     //修改index位置的元素
     public void set(int index,E e){
         if(index<0||index>=size){

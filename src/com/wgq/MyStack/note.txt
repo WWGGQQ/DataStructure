@@ -1,0 +1,6 @@
+简单的对时间复杂度进行分析
+   void push(E e)     可能触发扩容操作   均摊复杂度 O（1）
+   E pop()   可能触发缩容操作   均摊复杂度 O（1）
+   E peek()  O（1）
+   int getSize()   O（1）
+   boolean isEmpty()  O（1）
