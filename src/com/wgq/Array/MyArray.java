@@ -3,8 +3,9 @@ package com.wgq.Array;
 /**
  * 基于java的数组 进行二次封装
  */
-public class MyArray {
-    private int[] data; //底层数组
+//增加泛型
+public class MyArray<E>{
+    private E[] data; //底层数组
     private int size; //数组中 有效元素的 个数 （指向第一个没有存放数据的索引）
 
     /**
@@ -12,7 +13,7 @@ public class MyArray {
      * @param capacity
      */
     public MyArray(int capacity){
-        this.data = new int[capacity];
+        this.data = (E[]) new Object[capacity];//java不支持 泛型数组（new E[] -->错误）    需要强转一下
         this.size = 0;
     }
     //无惨构造函数，默认是10
@@ -34,15 +35,15 @@ public class MyArray {
     }
 
     //向末尾添加一个元素
-    public void addLast(int e) {
+    public void addLast(E e) {
         add(size,e);
     }
     //向靠头添加一个元素
-    public void addFirst(int e){
+    public void addFirst(E e){
         add(0,e);
     }
     //向数组的指定位置添加一个元素
-    public void add(int index,int e){
+    public void add(int index,E e){
         if(size == data.length){//数组已经满了
             throw new IllegalArgumentException("数组已经满了");
         }
@@ -56,14 +57,14 @@ public class MyArray {
         size++;
     }
     //获取index位置的元素
-    public int get(int index){
+    public E get(int index){
         if(index<0||index>=size){
             throw new IllegalArgumentException("index 不合法");
         }
         return data[index];
     }
     //修改index位置的元素
-    public void set(int index,int e){
+    public void set(int index,E e){
         if(index<0||index>=size){
             throw new IllegalArgumentException("index 不合法");
         }
@@ -71,9 +72,9 @@ public class MyArray {
     }
 
     //查看数组中是否存在某一个元素
-    public boolean contains(int e){
+    public boolean contains(E e){
         for (int i=0;i<size;i++){
-            if(data[i] == e){
+            if(data[i] .equals(e) ){//因为  加了泛型  所以不能用==了   需要用equals
                 return true;
             }
         }
@@ -81,9 +82,9 @@ public class MyArray {
     }
 
     //查看数组中元素e所在的索引（第一个出现的），不存在返回-1
-    public int find(int e){
+    public int find(E e){
         for (int i=0;i<size;i++){
-            if(data[i] == e){
+            if(data[i] .equals(e) ){
                 return i;
             }
         }
@@ -92,8 +93,8 @@ public class MyArray {
 
     //从数组中删除元素   并返回删除的元素
        //对于index之后的每一个元素  都向前移动一位
-    public int remove(int index){
-        int removeElement = data[index];
+    public E remove(int index){
+        E removeElement = data[index];
         if(index<0||index>=size){
             throw new IllegalArgumentException("没有这个元素，index不合法");
         }
@@ -105,16 +106,16 @@ public class MyArray {
     }
 
     //s删除第一个元素
-    public int removeFirst(){
+    public E removeFirst(){
         return remove(0);
     }
     //删除 最后一个元素
-    public int removeLast(){
+    public E removeLast(){
         return remove(size-1);
     }
 
     //从数组中删除 指定元素  第一个碰到的
-    public boolean removeElement(int e){
+    public boolean removeElement(E e){
         int index = find(e);
         if(index != -1){
             remove(index);
