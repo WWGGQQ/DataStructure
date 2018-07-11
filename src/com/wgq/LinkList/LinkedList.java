@@ -136,7 +136,6 @@ public class LinkedList<E> {
         StringBuilder res = new StringBuilder();
         res.append("LinkedList:\n");
         res.append(String.format("Size:%d   \n",getSize()));
-        res.append("head:   ");
         Node current = dummyHead.next;
         while(current!=null){
             res.append(current.e+"->");
