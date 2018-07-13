@@ -1,5 +1,6 @@
 package com.wgq.LoopQueue;
 
+import com.wgq.LinkedListQueue.LinkedListQueue;
 import com.wgq.MyQueue.ArrayQueue;
 import com.wgq.MyQueue.Queue;
 
@@ -32,6 +33,10 @@ public class LoopAndArrayQueue {
         LoopQueue<Integer> loopQueue = new LoopQueue<>();
         double time2 = testQueue(loopQueue,opCount);
         System.out.println("LoopQueue,time :"+time2+"s");
+
+        LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
+        double time3 = testQueue(linkedListQueue,opCount);
+        System.out.println("LinkedListQueue,time :"+time3+"s");
 
       /*
         结果如下：
