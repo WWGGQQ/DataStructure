@@ -52,7 +52,6 @@ public class LinkedList<E> {
         node.next = pre.next;
         pre.next = node;
         size++;
-
     }
     //在链表头添加元素
     public void addFirst(E e){
@@ -103,6 +102,7 @@ public class LinkedList<E> {
             if(current.e .equals(e)){
                 return true;
             }
+            current = current.next;
         }
         return false;
     }
@@ -120,6 +120,7 @@ public class LinkedList<E> {
         Node retNode = pre.next;
         pre.next = retNode.next;
         retNode.next = null;
+        size--;
         return retNode.e;
     }
     //删除链表头的元素
@@ -131,6 +132,18 @@ public class LinkedList<E> {
         return delete(size-1);
     }
 
+    public void deleteElement(E e){
+        if(contains(e)){
+            Node cur = dummyHead.next;
+            for(int i=0;i<size;i++){
+                if(e.equals(cur.e)){
+                    delete(i);
+                    break;
+                }
+                cur = cur.next;
+            }
+        }
+    }
     @Override
     public String toString(){
         StringBuilder res = new StringBuilder();
@@ -142,7 +155,6 @@ public class LinkedList<E> {
             current = current.next;
         }
         res.append("NULL");
-        size--;
         return res.toString();
     }
 }
