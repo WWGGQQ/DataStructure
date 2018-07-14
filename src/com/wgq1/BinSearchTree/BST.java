@@ -269,14 +269,7 @@ public class BST<E extends Comparable<E>> {
     private Node remove(Node node ,E e){
         if(node == null){
             return null;
-        }
-        if(e.compareTo(node.e)<0){
-            node.left = remove(node.left,e);
-            return node;
-        }else if(e.compareTo(node.e)>0){
-            node.right = remove(node.right,e);
-            return node;
-        }else{
+        }else if(e.compareTo(node.e)==0){
             if(node.left == null){
                 Node rightNode = node.right;
                 node.right = null;
@@ -297,7 +290,13 @@ public class BST<E extends Comparable<E>> {
             return successor;
 
         }
-
+        if(e.compareTo(node.e)<0){
+            node.left = remove(node.left,e);
+            return node;
+        }else{
+            node.right = remove(node.right,e);
+            return node;
+        }
     }
     /**
      * 利用先序遍历打印出二叉搜索树
