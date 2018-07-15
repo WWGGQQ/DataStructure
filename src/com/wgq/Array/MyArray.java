@@ -1,5 +1,7 @@
 package com.wgq.Array;
 
+import javax.jws.Oneway;
+
 /**
  * 基于java的数组 进行二次封装
  */
@@ -20,6 +22,13 @@ public class MyArray<E>{
     public MyArray(){
         this(10);
     }
+    public MyArray(E[] es){
+        data = (E[])new Object[es.length];
+        for(int i=0;i<es.length;i++){
+            data[i] = es[i];
+        }
+        size = es.length;
+    }
 
     //获得数组中有效元素的个数
     public int getSize(){
@@ -35,10 +44,8 @@ public class MyArray<E>{
     }
 
     //向末尾添加一个元素
-    public void addLast(E e) {
-        add(size,e);
-    }
-    //向靠头添加一个元素
+    public void addLast(E e) { add(size,e); }
+    //向头添加一个元素
     public void addFirst(E e){
         add(0,e);
     }
@@ -157,6 +164,18 @@ public class MyArray<E>{
         }
     }
 
+    /**
+     * 交换 数组中 指定索引位置的两个元素
+     * @return
+     */
+    public void swap(int index1,int index2){
+        if(index1>=size || index1 <0 || index2 >= size || index2 < 0){
+            throw new IllegalArgumentException("索引越界");
+        }
+        E temp = data[index1];
+        data[index1] = data[index2];
+        data[index2] = temp;
+    }
 
     //拼接字符串显示数组的信息
     @Override
