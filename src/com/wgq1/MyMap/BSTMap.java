@@ -47,7 +47,7 @@ public class BSTMap<K extends Comparable<K>,V> implements MyMap<K,V> {
         return size == 0;
     }
 
-    @Override//递归实现
+    @Override//递归实现 向Map中插入一个元素
     public void add(K key, V value) {
         add(root,key,value);
     }

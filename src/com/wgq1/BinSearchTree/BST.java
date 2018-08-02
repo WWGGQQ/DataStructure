@@ -211,7 +211,7 @@ public class BST<E extends Comparable<E>> {
         }
         return maximum(node.right);
     }
-    //删除 的 具体操作   要考虑待删除节点是否还存在子树
+    //删除 的 具体操作   要考虑待删除节点是否还存在子树中
         //删除最小值  并返回
     public E removeMin(){
         E ret = minimum();
