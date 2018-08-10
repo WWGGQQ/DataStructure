@@ -107,8 +107,6 @@ public class RedBlackTree<K extends Comparable<K>,V> {
         if(isRed(node.right) && isRed(node.left)){
             flipColors(node);
         }
-
-
         //返回递归的上一层   继续验证
         return node;
     }
