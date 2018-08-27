@@ -7,9 +7,15 @@ import java.util.TreeMap;
  */
 public class HashTable<K ,V> {
 
+
+    private static final int uperTol = 10;//用作 动态空间处理 上界
+    private static final int lowerTol = 2;//用作 动态空间处理 下界
+    private static final int initCapicity = 7;
+
     private TreeMap<K,V>[] hashTable;
     private int M; //hash表中 有多少位置
     private int size; // 表中的 元素个数
+
 
     public HashTable(int M){
         this.M = M;
@@ -22,7 +28,7 @@ public class HashTable<K ,V> {
     }
 
     public HashTable(){
-        this(97);
+        this(initCapicity);
     }
 
     //一个私有的辅助方法
@@ -43,6 +49,9 @@ public class HashTable<K ,V> {
         }else{
             map.put(key,value);//不存在  ，添加  维护一下 size
             size++;
+            if(size >= uperTol * M){//判断是否需要扩容
+                resize(2*M);
+            }
         }
     }
 
@@ -53,6 +62,9 @@ public class HashTable<K ,V> {
         if(map.containsKey(key)){
             ret = map.remove(key);
             size--;
+            if(size <= lowerTol * M  && M/2 >= initCapicity){
+                resize(M/2);
+            }
         }
         return ret;
     }
@@ -74,6 +86,29 @@ public class HashTable<K ,V> {
 
     public V get(K key){
         return hashTable[hash(key)].get(key);
+    }
+
+
+    //私有辅助函数  扩容和 缩容的具体实现
+    /*
+        新建一个 TreeMap的数组  把原来哈希表中的数据 全部复制到 新的 数组中
+     */
+    private void resize(int newM){
+        TreeMap<K,V>[] newHashTable = new TreeMap[newM];
+        for(int i=0;i<newM;i++){
+            newHashTable[i] = new TreeMap<>();
+        }
+        //注意  在改变容量后 重新计算hash值的 时候  要 改变 M 的值
+        int oldM = M;
+        this.M = newM;
+        for(int i=0;i<oldM;i++){
+            TreeMap<K,V> map = hashTable[i];
+            for(K key:map.keySet()){
+                newHashTable[hash(key)].put(key,map.get(key));
+            }
+        }
+        this.hashTable = newHashTable;
+
     }
 
 }
