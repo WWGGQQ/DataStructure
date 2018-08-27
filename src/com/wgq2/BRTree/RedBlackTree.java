@@ -1,6 +1,6 @@
 package com.wgq2.BRTree;
 
-import com.sun.org.apache.regexp.internal.RE;
+
 
 /**
  * 模拟实现  红黑树
@@ -110,7 +110,5 @@ public class RedBlackTree<K extends Comparable<K>,V> {
         //返回递归的上一层   继续验证
         return node;
     }
-
-
 
 }
