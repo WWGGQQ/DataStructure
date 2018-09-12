@@ -1,5 +1,9 @@
 package com.wgq3.hash;
-import java.util.TreeMap;
+import com.wgq.LinkList.LinkedList;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * 使用jdk提供的TreeMap
  * 实现自己的 哈希表

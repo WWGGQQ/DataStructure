@@ -1,7 +1,5 @@
 package com.wgq.MyStack;
 
-import com.wgq.Array.MyArray;
-
 /**
  * 复用之前写的 MyArray结构 实现栈
  *
