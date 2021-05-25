@@ -110,7 +110,7 @@ public class AVL<K extends Comparable<K>,V> {
     /**
      * 对节点y进行向右旋转操作   返回旋转后的新的根节点x
      *             y                               x
-     *           /  \           右旋转            /  \
+     *           /  \           右旋转                        /  \
      *         x     t4     ------------->      z     y
      *       /  \                              / \    /\
      *     z     t3                           t1 t2  t3 t4
@@ -135,7 +135,7 @@ public class AVL<K extends Comparable<K>,V> {
      * 对节点y进行向左旋转操作   返回旋转后的新的根节点x
      *                  y
      *                 / \                                 x
-     *               T4   x              左旋转           / \
+     *               T4   x              左旋转                        / \
      *                   / \          ----------->       y    z
      *                 T3   z                           /\     /\
      *                     / \                        T4  T3  T2 T1
